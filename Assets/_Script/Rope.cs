@@ -25,6 +25,7 @@ public class Rope : MonoBehaviour
 			HingeJoint2D joint = link.GetComponent<HingeJoint2D>();
 			joint.connectedBody = previousRB;
 			previousRB = link.GetComponent<Rigidbody2D>();
+			previousRB.gravityScale = i / 10;
 			
 		}
 		weigth.ConnectRopeEnd(link.GetComponent<Rigidbody2D>());
