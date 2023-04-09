@@ -6,11 +6,11 @@ using UnityEngine;
 public class GameView : MonoBehaviour
 {
     private List<LevelConfig> levels => GameConfigs.Instance.levelConfigs.levels;
-    private void Awake()
-    {
-        CreateLevel(0);
-    }
-    private void CreateLevel(int levelIdx)
+    // private void Awake()
+    // {
+    //     CreateLevel(0);
+    // }
+    public void CreateLevel(int levelIdx)
     {
         if (!levels.HasIndex(levelIdx))
         {
