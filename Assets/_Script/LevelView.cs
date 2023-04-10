@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class LevelView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private List<StarView> stars;
+    [SerializeField] private EndPointView endPoint;
+    public void Init(int levelIdx)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        LevelModel model = new(levelIdx);
+        stars.ForEach(s => s.onCatchCallback = () => model.starCount++);
+        endPoint.onCatchCallback = () =>
+        {
+            model.starCount++;
+            GameSession.Instance.CompleteLevel(model);
+        };
     }
 }

@@ -21,7 +21,7 @@ public class GameView : MonoBehaviour
                 return;
             }
         }
-        Instantiate(levels[levelIdx].levelView);
+        Instantiate(levels[levelIdx].levelView).Init(levelIdx);
     }
 
 }

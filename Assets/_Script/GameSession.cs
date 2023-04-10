@@ -26,10 +26,9 @@ public class GameSession : Singleton<GameSession>
     {
         var saves = GameSaves.Instance;
         if (model.starCount >= 1) saves.currentLevel.value++;
-
-        int modelIdx = saves.levelModels.FindIndex(savedModel => savedModel.levelName == model.levelName);
-        if (modelIdx == -1) saves.levelModels.Add(model);
-        else saves.levelModels[modelIdx] = model;
+        
+        if (!saves.levelModels.HasIndex(model.levelIdx)) saves.levelModels.Add(model);
+        else saves.levelModels[model.levelIdx] = model;
 
         LoadScene(Scenes.MenuScene);
     }

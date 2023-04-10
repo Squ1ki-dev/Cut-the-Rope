@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class LevelModel
 {
-    public LevelModel(string levelName)
+    public LevelModel(int levelName)
     {
-        this.levelName = levelName;
+        this.levelIdx = levelName;
     }
     public int starCount;
-    public string levelName;
+    public int levelIdx;
 }

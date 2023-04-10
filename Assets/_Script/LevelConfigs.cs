@@ -10,5 +10,4 @@ public class LevelConfigs : ScriptableObject
 public class LevelConfig
 {
     public LevelView levelView;
-    public string levelName;
 }
