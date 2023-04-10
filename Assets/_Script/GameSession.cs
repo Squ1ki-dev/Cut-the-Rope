@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Tools;
 using UnityEngine;
@@ -21,9 +22,15 @@ public class GameSession : Singleton<GameSession>
             Object.FindObjectOfType<GameView>().CreateLevel(level);
         });
     }
-    public void CompleteLevel(GameModel model)
+    public void CompleteLevel(LevelModel model)
     {
-        if(model.starCount >= 1) GameSaves.Instance.currentLevel.value++;
+        var saves = GameSaves.Instance;
+        if (model.starCount >= 1) saves.currentLevel.value++;
+        
+        int modelIdx = saves.levelModels.FindIndex(savedModel => savedModel.levelName == model.levelName);
+        if (modelIdx == -1) saves.levelModels.Add(model);
+        else saves.levelModels[modelIdx] = model;
+
         LoadScene(Scenes.MenuScene);
     }
     private void LoadScene(Scenes scene, System.Action onComplete = null)
