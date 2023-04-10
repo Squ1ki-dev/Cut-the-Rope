@@ -26,7 +26,7 @@ public class GameSession : Singleton<GameSession>
     {
         var saves = GameSaves.Instance;
         if (model.starCount >= 1) saves.currentLevel.value++;
-        
+
         int modelIdx = saves.levelModels.FindIndex(savedModel => savedModel.levelName == model.levelName);
         if (modelIdx == -1) saves.levelModels.Add(model);
         else saves.levelModels[modelIdx] = model;
@@ -37,7 +37,11 @@ public class GameSession : Singleton<GameSession>
     {
         WindowManager.Instance.CloseAll();
         var operation = SceneManager.LoadSceneAsync(scene.ToString());
+        if (operation == null)
+        {
+            Debug.LogError("Scene not exist in build");
+            return;
+        }
         operation.completed += o => onComplete.Invoke();
-        if (operation == null) Debug.LogError("Scene not exist in build");
     }
 }
