@@ -16,6 +16,7 @@ public class LevelView : MonoBehaviour
         stars.ForEach(s => s.onCatchCallback = () => model.starCountReactive.value++);
         endPoint.onCatchCallback = () =>
         {
+            isTryingCompleteLevel = true;
             model.starCountReactive.value++;
             StartCoroutine(CompleteLevelWithDelay(model));
         };
