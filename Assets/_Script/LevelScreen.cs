@@ -15,7 +15,7 @@ public class LevelScreen : WindowBase
     {
         replayBtn.OnClick(() =>
         {
-            GameSession.Instance.StartGame();
+            GameSession.Instance.ReloadLevel();
         });
         levelNumber.text = "Level: " + (model.levelIdx + 1);
         model.starCountReactive.SubscribeAndInvoke(value => presenter.Present(value, starPrefab, starsContainer));

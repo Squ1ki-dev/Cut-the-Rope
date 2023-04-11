@@ -41,7 +41,7 @@ public class LevelView : MonoBehaviour
     }
     private void TryCompleteLevel()
     {
-        GameSession.Instance.CompleteLevel(model);
+        GameSession.Instance.ReloadLevel();
         isTryingCompleteLevel = false;
     }
     private bool OnScreen(Vector3 position)

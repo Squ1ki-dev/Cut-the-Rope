@@ -14,9 +14,11 @@ public enum Scenes
 
 public class GameSession : Singleton<GameSession>
 {
+    private int currentLevel = -1;
     public void StartGame() => StartGame(GameSaves.Instance.currentLevel.value);
     public void StartGame(int level)
     {
+        currentLevel = level;
         LoadScene(Scenes.GameScene, onComplete: () =>
         {
             Object.FindObjectOfType<GameView>().CreateLevel(level);
@@ -24,6 +26,7 @@ public class GameSession : Singleton<GameSession>
     }
     public void CompleteLevel(LevelModel model)
     {
+        currentLevel = -1;
         var saves = GameSaves.Instance;
         if (model.starCountReactive.value >= 1) saves.currentLevel.value++;
         
@@ -31,6 +34,10 @@ public class GameSession : Singleton<GameSession>
         else saves.levelModels[model.levelIdx] = model;
 
         LoadScene(Scenes.MenuScene);
+    }
+    public void ReloadLevel()
+    {
+        StartGame(currentLevel);
     }
     private void LoadScene(Scenes scene, System.Action onComplete = null)
     {
