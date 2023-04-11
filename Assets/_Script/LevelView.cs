@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 
 public class LevelView : MonoBehaviour
@@ -10,12 +11,13 @@ public class LevelView : MonoBehaviour
     public void Init(int levelIdx)
     {
         LevelModel model = new(levelIdx);
-        stars.ForEach(s => s.onCatchCallback = () => model.starCount++);
+        stars.ForEach(s => s.onCatchCallback = () => model.starCountReactive.value++);
         endPoint.onCatchCallback = () =>
         {
-            model.starCount++;
+            model.starCountReactive.value++;
             StartCoroutine(CompleteLevelWithDelay(model));
         };
+        WindowManager.Instance.Show<LevelScreen>().Show(model);
     }
 
     private IEnumerator CompleteLevelWithDelay(LevelModel model)

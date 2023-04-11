@@ -25,7 +25,7 @@ public class GameSession : Singleton<GameSession>
     public void CompleteLevel(LevelModel model)
     {
         var saves = GameSaves.Instance;
-        if (model.starCount >= 1) saves.currentLevel.value++;
+        if (model.starCountReactive.value >= 1) saves.currentLevel.value++;
         
         if (!saves.levelModels.HasIndex(model.levelIdx)) saves.levelModels.Add(model);
         else saves.levelModels[model.levelIdx] = model;
