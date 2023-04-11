@@ -41,6 +41,6 @@ public class GameSession : Singleton<GameSession>
             Debug.LogError("Scene not exist in build");
             return;
         }
-        operation.completed += o => onComplete.Invoke();
+            operation.completed += o => onComplete?.Invoke();
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 public class CatchableView : MonoBehaviour
 {
     public Action onCatchCallback;
@@ -10,11 +9,20 @@ public class CatchableView : MonoBehaviour
         if (onCatchCallback != null && other.gameObject.GetComponent<Weight>())
         {
             onCatchCallback?.Invoke();
+            
             OnCatch();
         }
     }
     protected virtual void OnCatch()
     {
-        Destroy(gameObject);
+        EndPointView endPointView = GetComponent<EndPointView>();
+        Weight weight = GetComponent<Weight>();
+        if (endPointView != null && weight != null)
+        {
+            endPointView.GetComponent<SpriteRenderer>().color = Color.green;
+            weight.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else
+            Destroy(gameObject);
     }
 }
