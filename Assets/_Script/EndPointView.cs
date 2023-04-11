@@ -7,6 +7,6 @@ public class EndPointView : CatchableView
     protected override void OnCatch(Weight player)
     {
         GetComponent<SpriteRenderer>().color = Color.green;
-        player.GetComponent<SpriteRenderer>().enabled = false;
+        player.GetComponent<SpriteRenderer>().SetActive(false);
     }
 }
