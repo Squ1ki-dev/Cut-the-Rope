@@ -6,23 +6,16 @@ public class CatchableView : MonoBehaviour
     public Action onCatchCallback;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (onCatchCallback != null && other.gameObject.GetComponent<Weight>())
+        var player = other.gameObject.GetComponent<Weight>();
+        if (onCatchCallback != null && player)
         {
             onCatchCallback?.Invoke();
             
-            OnCatch();
+            OnCatch(player);
         }
     }
-    protected virtual void OnCatch()
+    protected virtual void OnCatch(Weight player)
     {
-        EndPointView endPointView = GetComponent<EndPointView>();
-        Weight weight = GetComponent<Weight>();
-        if (endPointView != null && weight != null)
-        {
-            endPointView.GetComponent<SpriteRenderer>().color = Color.green;
-            weight.GetComponent<SpriteRenderer>().enabled = false;
-        }
-        else
-            Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
