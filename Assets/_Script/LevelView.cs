@@ -19,7 +19,7 @@ public class LevelView : MonoBehaviour
         {
             isTryingCompleteLevel = true;
             ropes.SetActive(false);
-            this.Wait(3, () => WindowManager.Instance.Show<EndScreen>().Show(model));//GameSession.Instance.CompleteLevel(model));
+            this.Wait(3, () => WindowManager.Instance.Show<EndScreen>().Show(model));
         };
         WindowManager.Instance.Show<LevelScreen>().Show(model);
     }
