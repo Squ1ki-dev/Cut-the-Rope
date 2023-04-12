@@ -8,6 +8,7 @@ public class LevelView : MonoBehaviour
     [SerializeField] private List<StarView> stars;
     [SerializeField] private EndPointView endPoint;
     [SerializeField] private Weight player;
+    [SerializeField] private Transform ropes;
     private LevelModel model;
     private bool isTryingCompleteLevel = false;
     public void Init(int levelIdx)
@@ -17,6 +18,7 @@ public class LevelView : MonoBehaviour
         endPoint.onCatchCallback = () =>
         {
             isTryingCompleteLevel = true;
+            ropes.SetActive(false);
             this.Wait(3, () => WindowManager.Instance.Show<EndScreen>().Show(model));//GameSession.Instance.CompleteLevel(model));
         };
         WindowManager.Instance.Show<LevelScreen>().Show(model);
