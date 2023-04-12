@@ -7,6 +7,7 @@ public class ProjectRunner : MonoBehaviour
 {
     private void Awake()
     {
-        WindowManager.Instance.Show<MainMenuScreen>().Show();
+        // WindowManager.Instance.Show<MainMenuScreen>().Show();
+        GameSession.Instance.StartGame();
     }
 }
