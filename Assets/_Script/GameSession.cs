@@ -29,17 +29,17 @@ public class GameSession : Singleton<GameSession>
         currentLevel = -1;
         var saves = GameSaves.Instance;
         if (model.starCountReactive.value >= 1) saves.currentLevel.value++;
-        
+
         if (!saves.levelModels.HasIndex(model.levelIdx)) saves.levelModels.Add(model);
         else saves.levelModels[model.levelIdx] = model;
 
-        LoadScene(Scenes.MenuScene);
+        // LoadScene(Scenes.MenuScene);
     }
     public void ReloadLevel()
     {
         StartGame(currentLevel);
     }
-    private void LoadScene(Scenes scene, System.Action onComplete = null)
+    public void LoadScene(Scenes scene, System.Action onComplete = null)
     {
         WindowManager.Instance.CloseAll();
         var operation = SceneManager.LoadSceneAsync(scene.ToString());
@@ -48,6 +48,6 @@ public class GameSession : Singleton<GameSession>
             Debug.LogError("Scene not exist in build");
             return;
         }
-            operation.completed += o => onComplete?.Invoke();
+        operation.completed += o => onComplete?.Invoke();
     }
 }

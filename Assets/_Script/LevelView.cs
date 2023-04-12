@@ -17,17 +17,9 @@ public class LevelView : MonoBehaviour
         endPoint.onCatchCallback = () =>
         {
             isTryingCompleteLevel = true;
-            model.starCountReactive.value++;
-            StartCoroutine(CompleteLevelWithDelay(model));
+            this.Wait(3, () => WindowManager.Instance.Show<EndScreen>().Show(model));//GameSession.Instance.CompleteLevel(model));
         };
         WindowManager.Instance.Show<LevelScreen>().Show(model);
-    }
-
-    private IEnumerator CompleteLevelWithDelay(LevelModel model)
-    {
-        yield return new WaitForSeconds(3f);
-
-        GameSession.Instance.CompleteLevel(model);
     }
     private void FixedUpdate()
     {

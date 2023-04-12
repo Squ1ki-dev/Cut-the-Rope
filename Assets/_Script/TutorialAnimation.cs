@@ -19,4 +19,6 @@ public class TutorialAnimation : MonoBehaviour
         hand.DOMove(startPos.WithX(startPos.x + lenght), duration / 2).OnComplete(() =>
         hand.DOMove(startPos, duration / 2).OnComplete(() => StartAnimation()));
     }
+    public void Stop() => hand.DOKill();
+    public void Resume() => StartAnimation();
 }
