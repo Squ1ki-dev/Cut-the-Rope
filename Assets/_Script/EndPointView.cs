@@ -10,7 +10,7 @@ public class EndPointView : CatchableView
     {
         GetComponent<SpriteRenderer>().SetSprite(free);
     }
-    protected override void OnCatch(Weight player)
+    protected override void OnCatch(Candy player)
     {
         catchParticle.Play();
         GetComponent<SpriteRenderer>().SetSprite(catched);

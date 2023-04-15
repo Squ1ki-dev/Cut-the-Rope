@@ -6,7 +6,7 @@ public class CatchableView : MonoBehaviour
     public Action onCatchCallback;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var player = other.gameObject.GetComponent<Weight>();
+        var player = other.gameObject.GetComponent<Candy>();
         if (onCatchCallback != null && player)
         {
             onCatchCallback?.Invoke();
@@ -14,7 +14,7 @@ public class CatchableView : MonoBehaviour
             OnCatch(player);
         }
     }
-    protected virtual void OnCatch(Weight player)
+    protected virtual void OnCatch(Candy player)
     {
         Destroy(gameObject);
     }

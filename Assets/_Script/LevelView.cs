@@ -7,7 +7,7 @@ public class LevelView : MonoBehaviour
 {
     [SerializeField] private List<StarView> stars;
     [SerializeField] private EndPointView endPoint;
-    [SerializeField] private Weight player;
+    [SerializeField] private Candy player;
     [SerializeField] private Transform ropes;
     private LevelModel model;
     private bool isTryingCompleteLevel = false;
