@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class EndPointView : CatchableView
 {
+    [SerializeField] private Sprite free, catched;
     [SerializeField] private ParticleSystem catchParticle;
+    private void Start()
+    {
+        GetComponent<SpriteRenderer>().SetSprite(free);
+    }
     protected override void OnCatch(Weight player)
     {
         catchParticle.Play();
-        GetComponent<SpriteRenderer>().color = Color.green;
+        GetComponent<SpriteRenderer>().SetSprite(catched);
         player.GetComponent<SpriteRenderer>().SetActive(false);
     }
 }

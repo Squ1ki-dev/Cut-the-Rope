@@ -18,6 +18,7 @@ public class GameSession : Singleton<GameSession>
     public void StartGame() => StartGame(GameSaves.Instance.currentLevel.value);
     public void StartGame(int level)
     {
+        Time.timeScale = 1.5f;
         currentLevel = level;
         LoadScene(Scenes.GameScene, onComplete: () =>
         {
@@ -26,6 +27,7 @@ public class GameSession : Singleton<GameSession>
     }
     public void CompleteLevel(LevelModel model)
     {
+        Time.timeScale = 1;
         currentLevel = -1;
         var saves = GameSaves.Instance;
         if (model.starCountReactive.value >= 1) saves.currentLevel.value++;
