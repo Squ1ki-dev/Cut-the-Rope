@@ -6,14 +6,15 @@ public class EndPointView : CatchableView
 {
     [SerializeField] private Sprite free, catched;
     [SerializeField] private ParticleSystem catchParticle;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private void Start()
     {
-        GetComponent<SpriteRenderer>().SetSprite(free);
+        spriteRenderer.SetSprite(free);
     }
     protected override void OnCatch(Candy player)
     {
         catchParticle.Play();
-        GetComponent<SpriteRenderer>().SetSprite(catched);
+        spriteRenderer.SetSprite(catched);
         player.GetComponent<SpriteRenderer>().SetActive(false);
     }
 }

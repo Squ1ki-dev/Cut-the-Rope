@@ -18,6 +18,8 @@ public class GameSession : Singleton<GameSession>
     public void StartGame() => StartGame(GameSaves.Instance.currentLevel.value);
     public void StartGame(int level)
     {
+        var levelsCount = GameConfigs.Instance.levelConfigs.levels.Count;
+        if(level >  levelsCount - 1) level = Random.Range(0, GameConfigs.Instance.levelConfigs.levels.Count);
         Time.timeScale = 1.5f;
         currentLevel = level;
         LoadScene(Scenes.GameScene, onComplete: () =>
