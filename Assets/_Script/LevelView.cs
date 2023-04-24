@@ -9,6 +9,7 @@ public class LevelView : MonoBehaviour
     [SerializeField] private EndPointView endPoint;
     [SerializeField] private Candy player;
     [SerializeField] private Transform ropes;
+    [SerializeField] private ParticleSystem confeti;
     private LevelModel model;
     private bool isTryingCompleteLevel = false;
     public void Init(int levelIdx)
@@ -19,6 +20,7 @@ public class LevelView : MonoBehaviour
         {
             isTryingCompleteLevel = true;
             ropes.SetActive(false);
+            confeti.Play();
             this.Wait(3, () => WindowManager.Instance.Show<EndScreen>().Show(model));
         };
         WindowManager.Instance.Show<LevelScreen>().Show(model);
