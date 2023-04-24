@@ -17,7 +17,7 @@ public class LevelScreen : WindowBase
         {
             GameSession.Instance.ReloadLevel();
         });
-        levelNumber.text = "Level: " + (model.levelIdx + 1);
+        levelNumber.text = "Level: " + (GameSaves.Instance.currentLevel.value + 1);//(model.levelIdx + 1);
         model.starCountReactive.SubscribeAndInvoke(value => presenter.Present(value, starPrefab, starsContainer));
     }
 }

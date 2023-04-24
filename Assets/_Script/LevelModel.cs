@@ -6,9 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class LevelModel
 {
-    public LevelModel(int levelName)
+    public LevelModel(int levelIdx)
     {
-        this.levelIdx = levelName;
+        this.levelIdx = levelIdx;
         starCountReactive.SubscribeAndInvoke(value => StarCount = value);
     }
     public Reactive<int> starCountReactive = new Reactive<int>();
