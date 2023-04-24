@@ -23,6 +23,11 @@ public class LevelView : MonoBehaviour
             confeti.Play();
             this.Wait(3, () => WindowManager.Instance.Show<EndScreen>().Show(model));
         };
+        player.onEnter = enteredObj =>
+        {
+            if(enteredObj.GetComponent<Floor>()) 
+                Invoke(nameof(LoseLevel), 1);
+        };
         WindowManager.Instance.Show<LevelScreen>().Show(model);
     }
     private void FixedUpdate()
@@ -32,11 +37,11 @@ public class LevelView : MonoBehaviour
             if (!isTryingCompleteLevel)
             {
                 isTryingCompleteLevel = true;
-                Invoke(nameof(TryCompleteLevel), 1);
+                Invoke(nameof(LoseLevel), 1);
             }
         }
     }
-    private void TryCompleteLevel()
+    private void LoseLevel()
     {
         GameSession.Instance.ReloadLevel();
         isTryingCompleteLevel = false;
