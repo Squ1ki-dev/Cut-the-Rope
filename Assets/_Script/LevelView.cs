@@ -20,12 +20,15 @@ public class LevelView : MonoBehaviour
         {
             isTryingCompleteLevel = true;
             ropes.SetActive(false);
-            confeti.Play();
-            this.Wait(3, () => WindowManager.Instance.Show<EndScreen>().Show(model));
+            this.Wait(1.3f, () =>
+            {
+                WindowManager.Instance.Show<EndScreen>().Show(model);
+                confeti.Play();
+            });
         };
         player.onEnter = enteredObj =>
         {
-            if(enteredObj.GetComponent<Floor>()) 
+            if (enteredObj.GetComponent<Floor>())
                 Invoke(nameof(LoseLevel), 1);
         };
         WindowManager.Instance.Show<LevelScreen>().Show(model);
