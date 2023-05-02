@@ -21,6 +21,7 @@ public class GameView : MonoBehaviour
                 return;
             }
         }
+        WindowManager.Instance.GetComponent<Canvas>().worldCamera = Camera.main;
         Instantiate(levels[levelIdx].levelView).Init(levelIdx);
     }
 
