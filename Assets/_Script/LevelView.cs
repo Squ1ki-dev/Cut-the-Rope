@@ -22,7 +22,7 @@ public class LevelView : MonoBehaviour
             ropes.SetActive(false);
             this.Wait(1.3f, () =>
             {
-                WindowManager.Instance.Show<EndScreen>().Show(model);
+                WindowManager.Instance.Show<EndScreen>().Show(model, endPoint.catched);
                 confeti.Play();
             });
         };

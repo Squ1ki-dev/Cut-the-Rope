@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EndPointView : CatchableView
 {
-    [SerializeField] private Sprite free, catched;
+    [SerializeField] private Sprite free;
+    public Sprite catched;
     [SerializeField] private ParticleSystem catchParticle;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private void Start()

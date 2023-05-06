@@ -9,8 +9,10 @@ public class EndScreen : AnimatedWindowBase
     [SerializeField] private RectTransform starsContainer, starPrefab;
     private SimplePresenter<RectTransform> presenter = new();
     [SerializeField] private Button nextBtn, replayBtn;
-    public void Show(LevelModel model)
+    [SerializeField] private Image candy;
+    public void Show(LevelModel model, Sprite candy)
     {
+        this.candy.sprite = candy;
         presenter.Present(model.StarCount, starPrefab, starsContainer);
         nextBtn.OnClick(() =>
         {
