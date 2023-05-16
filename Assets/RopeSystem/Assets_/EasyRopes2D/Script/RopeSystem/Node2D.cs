@@ -121,6 +121,17 @@ namespace Kilt.EasyRopes2D
             }
         }
 
+        public bool CutWithForce()
+        {
+            if (RopeParent != null)
+            {
+                return RopeParent.CutNode(this.gameObject, true);
+            }
+            else
+                DestroyUtils.DestroyImmediate(this.gameObject);
+
+            return true;
+        }
         public bool Cut()
         {
             if (RopeParent != null)

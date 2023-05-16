@@ -99,7 +99,7 @@ namespace Kilt.EasyRopes2D
             List<Rope2D> v_tensionedRopes = new List<Rope2D>();
             foreach (Rope2D v_rope in Rope2D.AllRopesInScene)
             {
-                if (v_rope != null && v_rope.IsRopeTensioned() && !v_rope.IsRopeBroken() && v_rope.UserCanCutTheRope)
+                if (v_rope != null && v_rope.IsRopeTensioned() && !v_rope.IsRopeBroken())
                     v_tensionedRopes.Add(v_rope);
             }
             return v_tensionedRopes;
@@ -161,7 +161,7 @@ namespace Kilt.EasyRopes2D
             {
                 Node2D v_node = p_object.GetComponent<Node2D>();
                 if (v_node != null)
-                    return v_node.Cut();
+                    return v_node.CutWithForce();
             }
             return false;
         }
