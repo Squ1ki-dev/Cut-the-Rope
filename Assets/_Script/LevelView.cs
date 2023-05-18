@@ -22,8 +22,31 @@ public class LevelView : MonoBehaviour
             ropes.SetActive(false);
             this.Wait(1.3f, () =>
             {
-                WindowManager.Instance.Show<EndScreen>().Show(model, endPoint.catched);
-                confeti.Play();
+                if ((levelIdx + 1) % 3 == 0)
+                {
+                    transform.SetActive(false);
+                    ///Bet code, need base class
+                    WindowManager.Instance.Show<DroppedObj>().onComplete = () =>
+                    {
+                        WindowManager.Instance.Show<ClickToStop>().onComplete = () =>
+                        {
+                            WindowManager.Instance.Show<ClickCounter>().onComplete = () =>
+                            {
+                                WindowManager.Instance.Show<GuessName>().onComplete = () =>
+                                {
+                                    WindowManager.Instance.Show<EndScreen>().Show(model, endPoint.catched);
+                                    transform.SetActive(true);
+                                    confeti.Play();
+                                };
+                            };
+                        };
+                    };
+                }
+                else
+                {
+                    WindowManager.Instance.Show<EndScreen>().Show(model, endPoint.catched);
+                    confeti.Play();
+                }
             });
         };
         player.onEnter = enteredObj =>

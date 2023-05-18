@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Tools;
 
-public class ClickToStop : MonoBehaviour
+public class ClickToStop : WindowBase
 {
     public List<Sprite> myAnswer;
     public List<Sprite> correctAnswer;
@@ -12,19 +13,22 @@ public class ClickToStop : MonoBehaviour
     public int counter;
     public int AnswerInt, CorrectAnswerInt;
     public TextMeshProUGUI clue;
+    public System.Action onComplete;
 
     // Start is called before the first frame update
     void Start()
     {
-        int rand = Random.Range(0,5);
+        int rand = Random.Range(0, 5);
         ImageCorrect.sprite = correctAnswer[rand];
-        InvokeRepeating("ChangeSprite",1,1);
+        InvokeRepeating("ChangeSprite", 1, 1);
         CorrectAnswerInt = rand;
     }
 
-    public void ChangeSprite(){
+    public void ChangeSprite()
+    {
         counter++;
-        if(counter >= myAnswer.Count){
+        if (counter >= myAnswer.Count)
+        {
             counter = 0;
         }
 
@@ -32,20 +36,26 @@ public class ClickToStop : MonoBehaviour
         AnswerInt = counter;
     }
 
-    public void Pause(){
+    public void Pause()
+    {
         CancelInvoke("ChangeSprite");
 
-        if(AnswerInt == CorrectAnswerInt){
+        if (AnswerInt == CorrectAnswerInt)
+        {
+            Close();
+            onComplete?.Invoke();
             clue.text = "=";
         }
-        else{
+        else
+        {
             clue.text = "!=";
         }
-        
+
     }
 
-    public void UnPause(){
-        InvokeRepeating("ChangeSprite",1,1);
+    public void UnPause()
+    {
+        InvokeRepeating("ChangeSprite", 1, 1);
     }
 
 }

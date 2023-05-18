@@ -31,6 +31,7 @@ public class DragNDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         if(correctAnswer){
             rectTransform.localScale = rectTransform.localScale * 1.5f;
             gameObject.GetComponent<Image>().raycastTarget = false;
+            FindObjectOfType<DroppedObj>().CompleteAnswer();
         }
     }
 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Tools;
 
-public class GuessName : MonoBehaviour
+public class GuessName : WindowBase
 {
     public Image outputImage;
     public List<Sprite> characters;
@@ -13,6 +14,7 @@ public class GuessName : MonoBehaviour
     public Button btn1, btn2;
     public string answer;
     public int rand;
+    public System.Action onComplete;
 
     void Start()
     {
@@ -48,6 +50,11 @@ public class GuessName : MonoBehaviour
         if (selectedAnswer == answer)
         {
             GuessedText.text = "CORRECT";
+                Close();
+                onComplete?.Invoke();
+            // this.Wait(2, () =>
+            // {
+            // });
         }
         else
         {
@@ -67,6 +74,6 @@ public class GuessName : MonoBehaviour
         while (newRand == val);
 
         return characterName[newRand];
-        
+
     }
 }

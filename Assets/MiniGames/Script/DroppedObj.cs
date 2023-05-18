@@ -1,27 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DroppedObj : MonoBehaviour
+public class DroppedObj : WindowBase
 {
     public List<Sprite> listCharacter;
-    public Image answer1,answer2,answer3;
+    public Image answer1, answer2, answer3;
     public string[] characterName;
+    public System.Action onComplete;
     // Start is called before the first frame update
     void Start()
     {
-        int rand = Random.Range(0,listCharacter.Count);
+        int rand = Random.Range(0, listCharacter.Count);
         GetAnswer1(rand);
     }
-
-    void GetAnswer1(int val){
+    int completedCount = 0;
+    public void CompleteAnswer()
+    {
+        completedCount++;
+        if (completedCount >= 3)
+        {
+            Close();
+            onComplete?.Invoke();
+        }
+    }
+    void GetAnswer1(int val)
+    {
         answer1.sprite = listCharacter[val];
         answer1.name = characterName[val];
         GetAnswer2(val);
     }
-    
-    void GetAnswer2(int val){
+
+    void GetAnswer2(int val)
+    {
         int newRand;
         do
         {
@@ -34,15 +47,18 @@ public class DroppedObj : MonoBehaviour
         GetAnswer3(val, newRand);
     }
 
-    void GetAnswer3(int val, int newVal){
+    void GetAnswer3(int val, int newVal)
+    {
         int newRand;
         do
         {
             newRand = Random.Range(0, listCharacter.Count);
         }
-        while (newRand == val || newRand == newVal); 
+        while (newRand == val || newRand == newVal);
         answer3.sprite = listCharacter[newRand];
         answer3.name = characterName[newRand];
+        // Close();
+        // onComplete?.Invoke();
     }
-    
+
 }
