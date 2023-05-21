@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Kilt;
 using Kilt.Extensions;
+using DG.Tweening;
 
 namespace Kilt.EasyRopes2D
 {
@@ -541,6 +542,25 @@ namespace Kilt.EasyRopes2D
                 RopeInternalUtils.TryClearRigidBody2D(RigidBody2DComponent);
                 ResetTimeToLerp();
             }
+        }
+
+        public Rigidbody2D candyRigidbody;
+        private bool isLifting = false;
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.GetComponent<Candy>())
+            {
+                isLifting = true;
+                other.gameObject.transform.SetParent(transform);
+                candyRigidbody.simulated = false; // Отключаем физику конфеты
+            }
+        }
+
+        private void Update()
+        {
+            if (isLifting)
+                BallonForceScale = 0.2f;
         }
 
         public void CloneModelForceBallonComponents()
